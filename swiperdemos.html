@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css"> <!-- href 붙여넣기 -->
+</head>
+<body>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none; color:inherit;}
+
+        .visual-slide{
+            height: 500px; background: #ccc;
+        }
+        .visual-slide .swiper-slide{background: #999;} /* slide per view에 해당하는 배경색 */
+
+        .btn-nav{position: absolute; top: 50%;
+            transform: translateY(-50%);
+            width: 50px; height: 50px;
+            background: #f00;
+            z-index: 1;} /* swiperwrapper과 같은 위치에 btn이있기때문에 zindex처리 */
+        .btn-nav.prev{left: 10px;}
+        .btn-nav.next{right: 10px;}
+    </style>
+
+    <div class="swiper visual-slide"> <!-- 임의로 이름 붙여줌 -->
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">1</div>
+            <div class="swiper-slide">2</div>
+            <div class="swiper-slide">3</div>
+            <div class="swiper-slide">4</div>
+            <div class="swiper-slide">5</div>
+        </div>
+        <!-- option -->
+        <div class="btn-nav prev">이전</div>
+        <div class="btn-nav next">이후</div>
+        <div class="swiper-pagination"></div> <!-- pagination 태그 따옴 -->
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src= "https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script> <!-- script 붙여넣기 -->
+    <script>
+        $(function(){
+            // 스크립트를 따와서, 설정한 class명에 맞게 이름 변경
+            var swiper = new Swiper(".visual-slide", {
+            navigation: {
+            nextEl: ".btn-nav.next", // 풀네임/뒷클래스명 둘 다사용가능 
+            prevEl: ".prev",
+        },
+
+            pagination: { // pagination 스크립트
+                el: ".swiper-pagination",
+            },
+
+            slidesPerView: 3, // Slides per view 스크립트
+            spaceBetween: 30,
+            pagination: {
+            el: ".swiper-pagination",
+            clickable: true,
+            },
+        });
+      });
+    </script>
+    
+</body>
+</html>

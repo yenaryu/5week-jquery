@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none; color:inherit;}
+
+        .tab-list{display: flex; text-align: center;}
+        .tab-list .tab-item{flex: 1; line-height: 50px; background: #ccc;}
+        .tab-list .tab-item.active{background: #f00;}
+
+        .tab-cont{}
+        .tab-cont .content{display: none;} /* 다 none인데 */
+        .tab-cont .content.active{display: block; background: #ccc; padding: 50px;} /* 작동중인 active만 block */
+    </style>
+
+
+    <div class="tab-list">
+        <a href="#detail" class="tab-item active">디테일</a> <!-- a태그를 i값과 연결해준다. id라서 앞에 #을 붙인다 -->
+        <a href="#review" class="tab-item">리뷰(20)</a>
+        <a href="#qna" class="tab-item">문의</a>
+    </div>
+
+    <div class="tab-cont">
+        <div id="detail" class="content active">디테일 내용</div>
+        <div id="review" class="content">리뷰 내용</div>
+        <div id="qna" class="content">문의 내용</div>
+    </div>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function(){
+            //tab-list의 tab-item을 클릭했을 때, 해당하는 tab-cont의 content 도출
+            $('.tab-list .tab-item').click(function(e){
+                e.preventDefault();
+                
+                target = $(this).attr('href') //this(tab-item)가 선택한 것의 href값(#~)을 가지고 옴 
+
+                $(this).addClass('active').siblings().removeClass('active');
+                //this(item)을 클릭했을 때, active클래스를 추가하고 + 남은 tab-item의 형제(sibling)에서 active클래스를 remove해준다.
+                
+                $(target).addClass('active').siblings().removeClass('active');
+                //target(선택한 href값)에 해당하는 tab-cont의 id값을 가져와 active클래스를 추가 + 남은 형제 active클래스 remove
+            })
+        })
+    </script>
+    
+</body>
+</html>

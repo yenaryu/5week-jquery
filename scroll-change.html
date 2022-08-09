@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none; color:inherit;}
+
+        header{
+            position: fixed;
+            top: 0; left: 0;
+            width: 90%; height: 100px;
+            background: #f00;
+        }
+        header.on{background: #00f;} /* header에 on이라는게 들어갔을때 파란색으로 변하게 */
+        .box{height: 2000px; background: #ccc; margin: 10px;}
+        .box.active{background: #888;}
+
+
+    </style>
+
+    <header>
+    </header>
+
+    <main>
+        <div class="box"></div>
+        <div class="box active"></div>
+        <div class="box"></div>
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+            $(window).scroll(function(){ //윈도우가 기준이기때문에 윈도우를 스크롤 했을 때,
+                curr = $(this).scrollTop(); // this(window)의 스크롤바에 현재 수직 스크롤 위치(scrollTop)
+                target = $('.box.active').offset().top //boxactive가 시작하는 지점의 y축(수직)위치(offsettop)
+
+                $('header').html(curr); //header을 스크롤하면 수직 위치의 수치가 보이게
+
+                if(curr >= target){ //스크롤한 현재 widow위치가 boxactive의 시작 위치보다 크거나 같을 때
+                    $('header').addClass('on'); //on이라는 클래스 추가해서 변화를 줌
+                }else{
+                    $('header').removeClass('on'); //다시 위로 스크롤할때 처음으로로 돌아올 수있게 remove on을 해준다
+                }
+
+            })
+        })
+
+
+    </script>
+    
+</body>
+</html>

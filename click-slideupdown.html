@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none; color:inherit;}
+
+        .gnb{}
+        .gnb a{display: block; background: pink;
+                line-height: 50px; text-align: center;} /* 모든 a태그 = 대메뉴+소메뉴 */
+        .gnb > li > a{background: #000; color:pink} /* 직계만 -> 대메뉴 */
+        .gnb .sub{display: none;} /* 숨겨야함 */
+        .gnb .sub a{}
+
+    </style>
+
+    <ul class="gnb">
+        <li>
+            <a href="">대메뉴</a>
+            <ul class="sub">
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">대메뉴</a>
+            <ul class="sub">
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">대메뉴</a>
+            <ul class="sub">
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+                <li><a href="">소메뉴1</a></li>
+            </ul>
+        </li>
+    </ul>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function(){
+               if($(this).siblings('.sub').css('display') == 'block'){
+                //1) if a를 클릭한것의 sub이 display block이라면 예, 아니라면 아니오
+                //만약 대메뉴를 클릭했을 때, 클릭안한 대메뉴들의 sub가 block상태인가?
+
+                    $('.sub').slideUp()
+                    //3) 소메뉴를 열어주니까 block이 됨 -> 1)번에서 '예'로 변화
+                    //클릭한 sub을 제외한, 다른 sub 모두 slideup으로 닫아줌
+                    
+               }else{
+                    $('.sub').slideUp()
+                    //4) 모두 slideup으로 닫아줌  
+                  
+                    $(this).siblings().slideDown() 
+                    //2) '아니오'. 소메뉴는 block상태가 아니고 none상태이기 때문에, slidedown으로 소메뉴를 열어줘야함
+                    //a태그의 다른 형제들을 열리게 함 slidedown으로 밑으로 내려서 열리게함
+               }
+            }) 
+    </script>
+    
+</body>
+</html>

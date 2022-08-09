@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        *{margin: 0; padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none; color:inherit;}
+
+        .gnb{display: flex; text-align: center;} /* 옆으로 정렬 */
+        .gnb > li{flex:1;} /* 간격 */
+        .gnb > li > a{ /* 대메뉴 */
+            background: #f00;
+            display: block;
+            line-height: 50px;
+        }
+        .gnb .sub{display: none;} /* 화면에서 사라지게 */
+        .gnb .sub a{
+            display: block;
+            line-height: 50px;
+            background: #ccc;
+        }
+    </style>
+
+
+
+    <ul class="gnb">
+        <li>
+            <a href="">메뉴1</a>
+            <ul class="sub">
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">메뉴1</a>
+            <ul class="sub">
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="">메뉴1</a>
+            <ul class="sub">
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+                <li><a href="">menu1</a></li>
+            </ul>
+        </li>
+    </ul>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(function(){
+            $('.gnb > li').hover(function(){ //a태그 메뉴를 눌렀을 때 li>a들이 열리게 해야하는데 묶여있지 않기 때문에 gnb>li를 전체를 묶어줘야 한다   
+                //올렸을때
+                $(this).find('.sub').stop().slideDown(); // this(li)가 sub을 찾아서(find) 열리게(SlideDown) + 행동에 대해 즉시 멈추게(stop)
+            },function(){
+                //땟을때
+                $(this).find('.sub').stop().slideUp();
+            })
+        })
+    </script>
+    
+</body>
+</html>
