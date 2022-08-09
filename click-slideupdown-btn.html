@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{margin: 0;padding: 0;}
+        ul{list-style: none;}
+        a{text-decoration: none;color: inherit;}
+        .gnb a{ /* 대메뉴+소메뉴 */
+            display: block;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background: #ccc;
+        }
+        .gnb a.depth1{ /* 대메뉴 */
+            background: #000;
+            color: #fff;
+            position: relative;
+        }
+        .gnb a.depth1::after{ /* after으로 지정해서 버튼 추가 */
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: url(./btn.png) no-repeat center/100%;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+        }
+        .gnb a.depth1.active::after{ /* 버튼의 active / after은 js가 적용되지 않는다 */
+            transform: translateY(-50%) rotate(180deg); /* after에서 지정한 tftl을 다시한번 해줘야 한다(안그러면 적용 안됨) */
+        }
+        .gnb .sub{display: none;}
+    </style>
+</head>
+<body>
+    <ul class="gnb">
+        <li>
+            <a href="" class="depth1">대메뉴1</a> <!-- 대메뉴에 클래스 지정 -->
+            <ul class="sub">
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="" class="depth1">대메뉴1</a>
+            <ul class="sub">
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+            </ul>
+        </li>
+        <li>
+            <a href="" class="depth1">대메뉴1</a>
+            <ul class="sub">
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+                <li><a href="">소메뉴</a></li>
+            </ul>
+        </li>
+    </ul>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(function(){
+
+            $('.depth1').click(function(e){
+                e.preventDefault();
+                if( $(this).siblings('.sub').css('display') == 'block'){
+                //1) if a를 클릭한것의 sub이 display block이라면 예, 아니라면 아니오
+
+                    $('.sub').stop().slideUp()
+                     //4) 소메뉴를 열어주니까 block이 됨 -> 다른 sub 모두 slideup으로 닫아줌
+
+                    $('.depth1').removeClass('active');
+                    // 5)닫아준 대메뉴의 active클래스 제거해서 180도 뒤집힌거 복구
+
+
+                }else{
+
+                    $('.depth1').removeClass('active');
+                    //7) 닫아준 대메뉴들 active 클래스 제거해서 180도 뒤집힌거 복구
+
+                    $(this).addClass('active');
+                    //3)소메뉴를 열어준 대메뉴에 active클래스를 추가해서 버튼이 180도 뒤집힌 형태로
+
+                    $('.sub').stop().slideUp()
+                    //6) 모두 slideup으로 닫아줌  
+
+                    $(this).siblings('.sub').stop().slideDown();
+                    //2) '아니오'. 소메뉴는 none상태이기 때문에, slidedown으로 소메뉴를 열어줌
+                }
+            })   
+
+        })
+    </script>
+</body>
+</html>
