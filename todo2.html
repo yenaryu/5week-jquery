@@ -1,0 +1,90 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{background: #ccc;}
+        .wrap{
+            margin: 20px;
+            background: #fff;
+            padding: 20px;
+        }
+    </style>
+    
+    <div class="wrap">
+        <h2>할일 목록</h2>
+        <input type="text" class="input-text"> <!-- 검색창 -->
+        <button class="btn-add">추가</button> 
+        <hr> <!-- 선 -->
+        <ul class="list1"></ul>
+    </div>
+
+    <div class="wrap">
+        <h2>진행중인 목록</h2>
+        <hr>
+        <ul class="list3"></ul>
+    </div>
+
+    <div class="wrap">
+        <h2>끝낸 목록</h2>
+        <hr>
+        <ul class="list2"></ul>
+    </div>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(function(){
+        //추가 버튼을 눌렀을 때 할일목록 아래에 추가되도록
+        $('.btn-add').click(function(){ 
+            text1 = $('.input-text').val(); //검색창의 값을 가져와서
+            if(text1){
+                list1 = `<li>
+                            <span class="text1">${text1}</span>
+                            <button class="btn-end">일끝</button>
+                            <button class="btn-ing">진행중</button>
+                            <button class="btn-del">삭제</button>
+                        </li>`; //검색창값+3가지 버튼
+            
+                $('.list1').append(list1) //ul list1뒤에 추가된list1 태그 추가
+                $('.input-text').val(''); //검색창 초기화
+            }
+        })
+
+        //일끝을 눌렀을 때 끝낸목록으로 이동+할일목록에서 삭제
+        $(document).on('click','.btn-end',function(){
+            text2 = $(this).siblings('.text1').text(); //btn-end(this)의 형제siblings인 text1을 선택해서 text값 가져옴
+            list2 = `<li>${text2}</li>`;
+            $('.list2').append(list2) //ul list2 끝낸 목록 아래에 list2태그 추가
+            $(this).parent().remove(); //할일목록에서 삭제
+        })
+
+        //진행중을 눌렀을 때 진행중인목록으로 이동+할일목록에서 삭제
+        $(document).on('click','.btn-ing',function(){
+            text2 = $(this).siblings('.text1').text(); //btn-ing(this)의 형제siblings인 text1을 선택해서 text값 가져옴
+            list3 = `<li>
+                        <span class="text1">${text2}</span>
+                        <button class="btn-end">일끝</button>
+                        <button class="btn-del">삭제</button>
+                    </li>`;
+            $('.list3').append(list3) //ul list3 끝낸 목록 아래에 list3태그 추가
+            $(this).parent().remove(); //할일목록에서 삭제
+        })
+        
+        //삭제를 눌렀을 때 할일목록에서 삭제
+        $(document).on('click','.btn-del',function(){
+            $(this).parent().remove();
+        })
+        
+    })
+    </script>
+</body>
+</html>
